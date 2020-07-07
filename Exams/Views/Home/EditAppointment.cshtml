@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Редактировать запись";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Exams.Models.Appointment
+<h1>Запись</h1>
+
+@using (Html.BeginForm("EditAppointment", "Home", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.ExamId)
+    <p>
+        @Html.LabelFor(m => m.ExamDate, "Время экзамена")
+        <br />
+        @Html.HiddenFor(m => m.ExamDate)
+        @Html.EditorFor(m => m.ExamDate, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly" } })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Student, "ФИО")
+        <br />
+        @Html.EditorFor(m => m.Student)
+    </p>
+    <p><input type="submit" value="Подтвердить" /></p>
+</fieldset>
+    <div>
+        @Html.ActionLink("Вернуться к выбору времени", "Index")
+    </div>
+}

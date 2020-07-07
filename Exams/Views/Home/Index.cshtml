@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Exams.Models.Appointment>
+
+@{
+    ViewBag.Title = "CreateAppointment";
+}
+
+    <h1 align="center">Запись на экзамен</h1>
+    <h3>@ViewBag.Message</h3>
+    <table class="table">
+        <tr>
+            <content></content>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayName("Время")
+            </th>
+            <th>
+                @Html.DisplayName("ФИО")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamDate)
+                </td>
+                <td>
+                    @if (item.Student != null)
+                    {
+                        @Html.TextBoxFor(modelItem => item.Student, new { disabled = "disabled", @readonly = true })
+                    }
+                    @if (item.Student == null)
+                    {
+                        @Html.ActionLink("Записаться", "EditAppointment", new { id = item.ExamId })
+                    }
+                </td>
+            </tr>
+
+        }
+    </table>
+
